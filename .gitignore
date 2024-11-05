@@ -1,0 +1,15 @@
+# Evita que se suba el entorno virtual a Git
+venv/
+.venv
+
+#archivos de prueba
+API_prueba.ipynb
+
+prueba.py
+
+datasets/*.csv
+
+_pycache_/
+
+Modelo/_pycache_/
+Modelo/_init
