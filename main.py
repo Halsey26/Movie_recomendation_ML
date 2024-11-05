@@ -1,10 +1,17 @@
 from fastapi import FastAPI
 import pandas as pd
+import uvicorn
+import os
 from fastapi.responses import JSONResponse
 from Modelo.modelo_ML import recomendacion  # Importar la función de recomendación
 
 
 app = FastAPI()
+
+
+if __name__ == "__main__":
+    port = int(os.getenv("PORT", 8000))  # Usa el puerto de entorno, o el 8000 como default
+    uvicorn.run(app, host="0.0.0.0", port=port)
 
 # Variables globales para los datasets, inicialmente vacías
 movie_api = None
