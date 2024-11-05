@@ -1,4 +1,20 @@
 
+# Función para desanidar <p>
+# **Párametros de entrada**: dataframe y columna a desanidar
+
+# 1. Se extraer los valores del str
+# 2. Verificar si es lista/diccionario
+# 3. Normalizar columnas
+# 4. Cambiar el nombre de columnas normalizadas
+# 5. Elimina la columna original
+# 6. Concatenar las nuevas columnas al dataframe final
+
+import ast
+import pandas as pd
+from pandas import json_normalize
+import sys
+import os
+sys.path.append(os.path.abspath(".."))
 
 
 def desanidar_concat(df, col):
@@ -19,3 +35,4 @@ def desanidar_concat(df, col):
     new_df= df.drop(columns=col).join(col_norm)
 
     return new_df
+
