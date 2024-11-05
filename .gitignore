@@ -13,3 +13,8 @@ _pycache_/
 
 Modelo/_pycache_/
 Modelo/_init
+
+ETL/
+EDA/
+funciones/
+dataset/
