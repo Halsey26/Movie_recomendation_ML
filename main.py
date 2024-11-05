@@ -20,17 +20,29 @@ movie_crew = None
 movies_filt = None
 
 # Función para cargar los datasets cuando sean necesarios
-def load_datasets():
+def load_datasets(dataset_name=None):
     global movie_api, movie_cast, movie_crew, movies_filt
-    if movie_api is None:
+    
+    if dataset_name == 'movie_api' and movie_api is None:
         movie_api = pd.read_parquet('datasets/movie_dataset_final.parquet', engine='pyarrow')
-    if movie_cast is None:
+    elif dataset_name == 'movie_cast' and movie_cast is None:
         movie_cast = pd.read_parquet('datasets/credits_cast.parquet', engine='pyarrow')
-    if movie_crew is None:
+    elif dataset_name == 'movie_crew' and movie_crew is None:
         movie_crew = pd.read_parquet('datasets/credits_crew.parquet', engine='pyarrow')
-    if movies_filt is None:
+    elif dataset_name == 'movies_filt' and movies_filt is None:
         movies_filt = pd.read_parquet('datasets/movie_modelo.parquet')
 
+    # Opcional: Para liberar memoria, puedes eliminar datasets ya cargados si no se necesitan
+    # if dataset_name and dataset_name in ['movie_api', 'movie_cast', 'movie_crew', 'movies_filt']:
+    #     unload_datasets()
+
+def unload_datasets():
+    global movie_api, movie_cast, movie_crew, movies_filt
+    # Reiniciar las variables a None para liberar memoria
+    movie_api = None
+    movie_cast = None
+    movie_crew = None
+    movies_filt = None
 
 #FUNCIONES
 # def f_filmaciones_mes(df, mes, column):
