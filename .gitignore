@@ -7,7 +7,7 @@ API_prueba.ipynb
 
 prueba.py
 
-datasets/*.csv
+datasets_original/*.csv
 
 _pycache_/
 
