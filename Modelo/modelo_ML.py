@@ -7,14 +7,14 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 # movies_filt = pd.read_parquet('../datasets/movie_modelo.parquet')
 movies_filt = pd.read_parquet('datasets/movie_modelo.parquet', engine= 'pyarrow')
-# Normalización de popularity, budget, revenue y vote_average
+
 df= movies_filt
-# Supón que tienes el DataFrame `df` con las columnas mencionadas
+
+# Normalización de popularity, budget, revenue y vote_average
 scaler = MinMaxScaler()
 df[['popularity', 'budget', 'revenue', 'vote_average']] = scaler.fit_transform(
     df[['popularity', 'budget', 'revenue', 'vote_average']]
 )
-
 
 # Procesamiento de overview (sinopsis)
 
@@ -24,7 +24,7 @@ tfidf_matrix = tfidf.fit_transform(df['overview']).toarray()
 
 
 # Concatenación de todas las características
-# Combina las características numéricas y los vectores TF-IDF de la sinopsis
+# Combina las caracteristicas numericas y los vectores tfidf
 X = np.concatenate([
     df[['popularity', 'budget', 'revenue', 'vote_average']].values,
     tfidf_matrix
@@ -32,7 +32,6 @@ X = np.concatenate([
 
 
 # SIMILITUD DEL COSENO
-
 # Calcula la matriz de similitud de coseno
 cosine_sim = cosine_similarity(X)
 
@@ -56,7 +55,6 @@ def recomendacion(movie, cosine_sim_matrix, df, top_n=5):
     
     # Obtiene el índice de la película con el título dado
     movie_index = df[df['title'] == movie].index[0]
-
 
     # Calcula la similitud de la película base con todas las demás
     sim_scores = list(enumerate(cosine_sim_matrix[movie_index]))
